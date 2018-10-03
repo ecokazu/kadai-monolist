@@ -1,4 +1,5 @@
 @if ($items)
+items.bladeテンプレ
     <div class="row">
         @foreach ($items as $item)
             <div class="item">
@@ -9,7 +10,21 @@
                             <img src="{{ $item->image_url }}" alt="">
                         </div>
                         <div class="panel-body">
-                            <p class="item-title"><a href="#">{{ $item->name }}</a></p>
+                            
+                            @if ($item->id)
+                                <p class="item-title"><a href="{{ route('items.show', $item->id) }}">{{ $item->name }}</a></p>
+                            @else
+                            
+                                <p class="item-title">{{ $item->name }}</p>
+                            @endif
+                            
+                            <!--wantボタン-->
+                            <div class="buttons text-center">
+                                @if (Auth::check())
+                                    @include('items.want_button', ['item' => $item])
+                                @endif
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

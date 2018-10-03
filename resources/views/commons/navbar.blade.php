@@ -30,8 +30,8 @@
                              </a>
                              
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">マイページ</a>
+                                <li>{{-- routeの第二引数でログインユーザーのIDをパラメーターで指定 --}}
+                                    <a href="{{ route('users.show',Auth::id()) }}">マイページ</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
