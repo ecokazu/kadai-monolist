@@ -1,7 +1,7 @@
 @if ($items)
-items.bladeテンプレ
+
     <div class="row">
-        @foreach ($items as $item)
+        @foreach ($items as $key=>$item)
             <div class="item">
                 <div>
                 <div class="col-md-3 col-sm-4 col-xs-12">
@@ -18,19 +18,29 @@ items.bladeテンプレ
                                 <p class="item-title">{{ $item->name }}</p>
                             @endif
                             
-                            <!--wantボタン-->
+                            
                             <div class="buttons text-center">
                                 @if (Auth::check())
-                                    @include('items.want_button', ['item' => $item])
+                                  <!--wantボタン--> 
+                                  @include('items.want_button', ['item' => $item])
+                                  <!--have-->  
+                                  @include('items.have_button', ['item' => $item])
                                 @endif
                            
-                             <!--have-->
+                             key:{{$key}}
                             
-                                @if (Auth::check())
-                                    @include('items.have_button', ['item' => $item])
-                                @endif
+                               
                             </div>
                         </div>
+                        {{--isset()で$item->countに値がりNullじゃないかチェック --}}
+                        {{-- countがある時だけランキング内容を表示 --}}
+                        @if (isset($item->count))
+                            <div class="panel-footer">
+                                {{-- 0から始まりの配列番号の$keyに+1して順位にしている --}}
+                                <p class="text-center">{{ $key+1 }}位: {{ $item->count}} Wants</p>
+                            </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
