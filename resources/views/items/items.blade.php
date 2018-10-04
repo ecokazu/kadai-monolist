@@ -27,7 +27,7 @@
                                   @include('items.have_button', ['item' => $item])
                                 @endif
                            
-                             key:{{$key}}
+                           
                             
                                
                             </div>
